@@ -2,19 +2,22 @@ import React, {useState, useEffect} from 'react'
 
 function Search(props){
     const setResult = props.setResult
-    const [user, setUser] = useState('kuanyui')
+    const [user, setUser] = useState('c3h3')
     const [input, setInput] = useState('')
-    const url = `https://api.github.com/users/${user}`
+    const urlHref = `https://api.github.com/users/${user}`
 
     useEffect(() => {
         const option = {
             method: 'GET',
             mode: 'cors',
             headers: {
-                'content-type': 'text/plain',
+                'content-type': 'application/json',
                 'authorization': process.env.TOKEN
             },
         }
+        const url = new URL('https://api/github.com')
+        url.href = urlHref
+
         fetch(url, option)
         .then(res => {
             if(res.ok) return res.json()
@@ -25,7 +28,7 @@ function Search(props){
             console.log(data)
         })
         .catch( error => console.error(error))
-    },[url, setResult])
+    },[urlHref, setResult])
     
     return (
         <div>

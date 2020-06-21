@@ -1,6 +1,7 @@
 import React, {useState} from 'react'
 import Search from './Search'
 import Output from './Container/Output'
+import './style.css'
 
 function App() {
   const [result, setResult] = useState({isFind: false})

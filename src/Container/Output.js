@@ -1,7 +1,9 @@
 import React, {useState, useEffect} from 'react'
+import Repo from './Repo'
 
 function Output(props) {
-    const {isFind,login, name, public_repos, repos_url} = props.result
+    const {isFind,login, name, public_repos, repos_url, bio,
+        avatar_url} = props.result
     const [list, setList] = useState([])
 
     useEffect(()=> {
@@ -9,14 +11,22 @@ function Output(props) {
             method: 'GET',
             mode: 'cors',
             headers: {
-                'content-type': 'application/vnd.github.mercy-preview+json',
+                'content-type': 'application/json',
                 'authorization': process.env.TOKEN
             },
         }
-        fetch(repos_url, option)
+        const url = new URL('https://api.github.com')
+        url.href = repos_url
+        url.search = new URLSearchParams({
+            type: 'public', 
+            sort: 'created', 
+            direction: 'asc'
+        })
+
+        fetch(url, option)
         .then(res => {
             if (res.ok) return res.json()
-            throw Error("Can't find repos")
+            throw Error('ops')
         })
         .then(data => {
             console.log(data)
@@ -25,21 +35,19 @@ function Output(props) {
         .catch(error => console.error(error))
     },[repos_url])
 
-    const disp = list.map(i => <a key={i.id} href={i.clone_url}> clone repo </a>)
+
+    const disp = list.map(item => (
+        <Repo key={item.id} dispInfo={item}/>
+    ))
 
     return (
         <div>
-            { isFind &&
-            <>
-                <div>
-                    <h1>{name}</h1>
-                    <h3>{login}</h3>
-                    <h3>{public_repos}</h3>
-                </div>
-                <div>
-                    {disp}
-                </div>
-            </>}   
+            {isFind && <img className="avatar-size" src={avatar_url} alt="ops" />}
+            <h1>{name}</h1>
+            <h3>{login}</h3>
+            <h3>{bio}</h3>
+            <p>{isFind && `Total public repository : ${public_repos}`}</p>
+           {isFind && disp}
         </div>
     )
 }

@@ -1,0 +1,14 @@
+.avatar-size {
+    height: 30vh;
+    width: 30vw;
+    object-fit: contain;
+}
+
+.repo-container {
+    display: block;
+    background-color: rgb(228, 225, 207);
+    color: rgb(48, 31, 49);
+    box-shadow: 0 2px 10px 0 gray;
+    height: 45vh;
+    text-align: center;
+}
