@@ -5,6 +5,7 @@ function Output(props) {
     const {isFind,login, name, public_repos, repos_url, bio,
         avatar_url} = props.result
     const [list, setList] = useState([])
+    const [page, setPage] = useState(2)
 
     useEffect(()=> {
         const option = {
@@ -30,15 +31,26 @@ function Output(props) {
         })
         .then(data => {
             console.log(data)
-            setList(data)
+            setList(data.slice(0, page))
         })
         .catch(error => console.error(error))
-    },[repos_url])
+    },[repos_url, page])
 
+    useEffect(() => {
+        const Scrolling = () => {
+            if (window.scrollTop >= window.innerHeight) {
+                setPage(page + 1)
+            }
+            console.trace('listen scroll')
+        }
+        window.addEventListener('scroll', Scrolling())
+    })
 
-    const disp = list.map(item => (
-        <Repo key={item.id} dispInfo={item}/>
+    const disp = list.map( item => (
+        <Repo key={item.id} dispInfo={item} /> 
     ))
+
+    disp.push(<h1 key={'loading'}>loading</h1>)
 
     return (
         <div>
