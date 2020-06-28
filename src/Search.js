@@ -25,7 +25,7 @@ function Search(props){
         })
         .then(data => {
             setResult({isFind: true, ...data})
-            console.log(data)
+            //console.log(data)
         })
         .catch( error => console.error(error))
     },[urlHref, setResult])
