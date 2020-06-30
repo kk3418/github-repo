@@ -1,34 +1,30 @@
 import React, {useState, useEffect} from 'react'
+import axios from 'axios'
 
 function Search(props){
     const setResult = props.setResult
     const [user, setUser] = useState('c3h3')
     const [input, setInput] = useState('')
-    const urlHref = `https://api.github.com/users/${user}`
 
     useEffect(() => {
         const option = {
-            method: 'GET',
-            mode: 'cors',
             headers: {
                 'content-type': 'application/json',
                 'authorization': process.env.TOKEN
             },
         }
-        const url = new URL('https://api/github.com')
-        url.href = urlHref
+        const url = `/users/${user}`
 
-        fetch(url, option)
+        axios.get(url, option)
         .then(res => {
-            if(res.ok) return res.json()
-             throw new Error('We have some problems')
+            console.log(res.data)
+            return res
         })
-        .then(data => {
-            setResult({isFind: true, ...data})
-            //console.log(data)
+        .then(res => {
+            setResult({isFind: true, ...res.data})
         })
         .catch( error => console.error(error))
-    },[urlHref, setResult])
+    },[user, setResult])
     
     return (
         <div>

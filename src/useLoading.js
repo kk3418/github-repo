@@ -1,4 +1,5 @@
 import {useState, useEffect, useCallback} from 'react'
+import axios from 'axios'
 
 export function useLoading(...arg) {
     const [repos_url] = arg
@@ -8,31 +9,29 @@ export function useLoading(...arg) {
 
     useEffect(()=> {
         const option = {
-            method: 'GET',
-            mode: 'cors',
             headers: {
                 'content-type': 'application/json',
                 'authorization': process.env.TOKEN
             },
+            params: {
+                type: 'public', 
+                sort: 'created', 
+                direction: 'asc'
+            }
         }
-        const url = new URL('https://api.github.com')
-        url.href = repos_url
-        url.search = new URLSearchParams({
-            type: 'public', 
-            sort: 'created', 
-            direction: 'asc'
-        })
+        const url = repos_url === undefined ? 
+            "https://api.github.com/users/c3h3/repos" : repos_url
 
-        fetch(url, option)
+        axios.get(url, option)
         .then(res => {
             setPage(2)
             setrowNow(0.5)
-            if (res.ok) return res.json()
+            if (res.statusText === 'OK') return res
             throw Error('ops')
         })
-        .then(data => {
-            //console.log(data)
-            setList(data)
+        .then(res => {
+            console.log(res.data)
+            setList(res.data)
         })
         .catch(error => console.error(error))
     },[repos_url])
