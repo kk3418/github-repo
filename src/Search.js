@@ -27,7 +27,7 @@ function Search(props){
     },[user, setResult])
     
     return (
-        <div>
+        <div className="search-box">
             <label htmlFor="username">username : </label>
             <input onChange={e => setInput(e.target.value)}
             value={input} type="text" placeholder="insert username" />

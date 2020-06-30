@@ -13,7 +13,7 @@ function Output(props) {
     disp.push(<h1 key={'Done'}>No more repository</h1>)
 
     return (
-        <div>
+        <div className="output">
             {isFind && <img className="avatar-size" src={avatar_url} alt="ops" />}
             <h1>{name}</h1>
             <h3>{login}</h3>

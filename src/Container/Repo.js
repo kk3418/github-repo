@@ -9,9 +9,12 @@ function Repo(props) {
         <div className="repo-container">
             <h3>{name}</h3>
             <p>{`last update : ${updated_at}`}</p>
-            <p>about this project :</p>
-            <p>{description}</p>
-            <input onClick={() => {
+            <div className="description">
+                <p>about this project :</p>
+                <p>{description}</p>
+            </div>
+            <input className="clone-btn"
+            onClick={() => {
                 copy.writeText(clone_url)
                 .then(() => alert('copied!'))
             } }
