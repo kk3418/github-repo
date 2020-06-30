@@ -8,6 +8,7 @@ export function useLoading(...arg) {
     const [rowNow, setrowNow] = useState(0.5)
 
     useEffect(()=> {
+        if (repos_url === undefined) return () => null
         const option = {
             headers: {
                 'content-type': 'application/json',
@@ -19,8 +20,7 @@ export function useLoading(...arg) {
                 direction: 'asc'
             }
         }
-        const url = repos_url === undefined ? 
-            "https://api.github.com/users/c3h3/repos" : repos_url
+        const url = repos_url
 
         axios.get(url, option)
         .then(res => {
