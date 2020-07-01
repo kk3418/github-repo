@@ -13,7 +13,7 @@ function Search(props){
                 'authorization': process.env.TOKEN
             },
         }
-        const url = `/users/${user}`
+        const url = `https://api.github.com/users/${user}`
 
         axios.get(url, option)
         .then(res => {
