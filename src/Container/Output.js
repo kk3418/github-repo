@@ -16,8 +16,8 @@ function Output(props) {
         <div className="output">
             {isFind && <img className="avatar-size" src={avatar_url} alt="ops" />}
             <h1>{name}</h1>
-            <h3>{login}</h3>
-            <h3>{bio}</h3>
+            <h2>{login}</h2>
+            <h2>{bio}</h2>
             <p>{isFind && `Total public repository : ${public_repos}`}</p>
            {isFind && disp}
         </div>
