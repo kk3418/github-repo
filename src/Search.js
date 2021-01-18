@@ -24,7 +24,7 @@ function Search({setResult}){
                 })
             })
         }
-    }, [])
+    }, [setResult])
     
     return (
         <div className="search-box">

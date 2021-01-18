@@ -1,4 +1,4 @@
-import React, {useState, useReducer} from 'react'
+import React, {useReducer} from 'react'
 import Search from './Search'
 import Output from './Output'
 import './style.css'
