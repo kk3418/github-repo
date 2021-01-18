@@ -8,11 +8,11 @@ function Repo(props) {
     return (
         <div className="repo-container">
             <h3>{name}</h3>
-            <p>{`last update : ${updated_at}`}</p>
-            <div className="description">
-                <p>about this project :</p>
+            <p>{`Last update : ${updated_at}`}</p>
+            {description && <div className="description">
+                <p>About this repository :</p>
                 <p>{description}</p>
-            </div>
+            </div>}
             <input className="clone-btn"
             onClick={() => {
                 copy.writeText(clone_url)

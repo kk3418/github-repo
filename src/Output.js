@@ -5,7 +5,7 @@ import {useLoading} from './useLoading'
 
 function Output(props) {
     const {isFind,login, name, public_repos, repos_url, bio,
-        avatar_url} = props.result
+        avatar_url, html_url} = props.result
     const [list] = useLoading(repos_url)
 
     const scrollToTop = () => scroll.scrollToTop({
@@ -24,6 +24,7 @@ function Output(props) {
             <h1>{name}</h1>
             <h2>{login}</h2>
             <h2>{bio}</h2>
+            {isFind &&<a href={html_url}>go to his/her/its github</a>}
             <p>{isFind && `Total public repository : ${public_repos}`}</p>
             {isFind && disp}
             <button className="scroll-to-top"
