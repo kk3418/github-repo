@@ -1,10 +1,18 @@
-import React, {useState} from 'react'
+import React, {useState, useReducer} from 'react'
 import Search from './Search'
 import Output from './Output'
 import './style.css'
 
 function App() {
-  const [result, setResult] = useState({isFind: false})
+  const initState = {isFind: false}
+  const reducer = (state, action) => {
+    switch(action.type) {
+      case 'UPDATE':
+        return {...action.payload}
+      default: return state
+    }
+  }
+  const [result, setResult] = useReducer(reducer, initState)
   return (
     <div>
       <Search setResult={setResult} />
