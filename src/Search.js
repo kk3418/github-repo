@@ -12,7 +12,9 @@ function Search({setResult}){
     
     return (
         <div className="search-box">
-            <label htmlFor="username">username : </label>
+            <label htmlFor="username">
+                username : 
+            </label>
             <input id="username" type="text" 
                 placeholder="insert username" 
                 onChange={e => setUser(e.target.value)}

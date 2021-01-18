@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
 import Search from './Search'
-import Output from './Container/Output'
+import Output from './Output'
 import './style.css'
 
 function App() {

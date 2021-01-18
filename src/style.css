@@ -4,6 +4,10 @@
     z-index: 1;
 }
 
+.scroll-to-top {
+    margin-bottom: 5vh;
+}
+
 .search-box {
     position: fixed;
     z-index: 2;
