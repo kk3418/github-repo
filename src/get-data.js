@@ -1,15 +1,8 @@
 import axios from 'axios'
 
-const option = {
-    headers: {
-        'content-type': 'application/json',
-        'authorization': process.env.TOKEN
-    },
-}
-
-export async function getData(user) {
-    const url = `https://api.github.com/users/${user}`
+export async function getData(url, option) {
     let response
+    
     await axios.get(url, option)
     .then(res => {
         response = res

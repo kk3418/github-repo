@@ -4,25 +4,32 @@ import {getData} from './get-data'
 function Search({setResult}){
     const [user, setUser] = useState('')
 
+    const url = `https://api.github.com/users/${user}`
+    const option = {
+        headers: {
+            'content-type': 'application/json',
+            'authorization': process.env.TOKEN
+        },
+    }
     const handleClick = () => {
-        getData(user).then(res => {
+        getData(url, option).then(res => {
             setResult({
                 type: 'UPDATE',
                 payload: {isFind: true, ...res.data}
             })
-        })
-        localStorage.setItem('result', user)
+        }).catch(error => console.error(error))
+        sessionStorage.setItem('result', user)
     }
 
     useEffect(() => {
-        const storage = localStorage.getItem('result')
+        const storage = sessionStorage.getItem('result')
         if (storage) {
             getData(storage).then(res => {
                 setResult({
                     type: 'UPDATE',
                     payload: {isFind: true, ...res.data}
                 })
-            })
+            }).catch(err => console.error(err))
         }
     }, [setResult])
     
