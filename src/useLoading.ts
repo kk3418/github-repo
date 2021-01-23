@@ -1,11 +1,16 @@
 import {useState, useEffect} from 'react'
 import {getData} from './get-data'
 
-export function useLoading({repos_url}) {
-    const [list, setList] = useState(undefined)
+type Args = {
+    repos_url: string,
+}
+
+export function useLoading({repos_url}: Args) {
+    const [list, setList] = useState<
+        undefined | Array<any>
+    >(undefined)
 
     useEffect(() => {
-        if (repos_url === undefined) return () => null
         const option = {
             headers: {
                 'content-type': 'application/json',
@@ -20,7 +25,6 @@ export function useLoading({repos_url}) {
         }
         getData(repos_url, option).then(res => setList(res?.data))
     }, [repos_url])
-
 
     return [list]
 }

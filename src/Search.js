@@ -17,7 +17,9 @@ function Search({setResult}){
                 type: 'UPDATE',
                 payload: res.data,
             })
-        }).catch(error => console.error(error))
+        }).catch(() => setResult({
+            type: 'NOT_FOUND',
+        }))
     }, [setResult])
     
     const handleClick = () => {

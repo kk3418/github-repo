@@ -1,14 +1,18 @@
-import React, {useReducer} from 'react'
+import React, {useReducer, FC} from 'react'
 import Search from './Search'
 import Output from './Output'
 import './style.css'
 
-function App() {
+const App: FC<{}> = () => {
   const initState = {}
-  const reducer = (state, action) => {
+  const reducer = (state: any, action: {
+    type: string, payload: any
+  }) => {
     switch(action.type) {
       case 'UPDATE':
         return {...action.payload}
+      case 'NOT_FOUND':
+        return {}
       default: return state
     }
   }
