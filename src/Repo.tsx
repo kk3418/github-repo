@@ -1,6 +1,11 @@
-import React from 'react'
+import React, {FC} from 'react'
+import {RepoData} from './response-type'
 
-function Repo(props) {
+interface Props {
+    dispInfo: RepoData,
+}
+
+const Repo: FC<Props> = (props) => {
     const {name, clone_url, updated_at, html_url, description
         } = props.dispInfo
     const copy = navigator.clipboard

@@ -1,9 +1,13 @@
-import React from 'react'
+import React, {FC} from 'react'
+import {UserRepos} from './response-type'
 import {animateScroll as scroll} from 'react-scroll'
 import Repo from './Repo'
 import {useLoading} from './useLoading'
 
-function Output(props) {
+interface Props {
+    result: UserRepos,
+}
+const Output: FC<Props> = (props) => {
     const {login, name, public_repos, repos_url, bio,
         avatar_url, html_url} = props.result
     const [list] = useLoading({repos_url})

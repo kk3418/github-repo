@@ -1,10 +1,14 @@
-import React, {useCallback, useEffect, useState} from 'react'
+import React, {useCallback, useEffect, useState, FC} from 'react'
 import {getData} from './get-data'
 
-function Search({setResult}){
+interface Props {
+    setResult: any,
+}
+
+const Search: FC<Props> = ({setResult}) => {
     const [user, setUser] = useState('')
 
-    const getUserData = useCallback((input) => {
+    const getUserData = useCallback((input: string) => {
         const url = `https://api.github.com/users/${input}`
         const option = {
             headers: {
@@ -12,7 +16,7 @@ function Search({setResult}){
                 'authorization': process.env.TOKEN
             },
         }
-        getData(url, option).then(res => {
+        getData(url, option).then((res: any) => {
             setResult({
                 type: 'UPDATE',
                 payload: res.data,
