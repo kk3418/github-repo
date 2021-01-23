@@ -4,7 +4,7 @@ import Output from './Output'
 import './style.css'
 
 function App() {
-  const initState = {isFind: false}
+  const initState = {}
   const reducer = (state, action) => {
     switch(action.type) {
       case 'UPDATE':

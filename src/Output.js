@@ -4,7 +4,7 @@ import Repo from './Repo'
 import {useLoading} from './useLoading'
 
 function Output(props) {
-    const {isFind,login, name, public_repos, repos_url, bio,
+    const {login, name, public_repos, repos_url, bio,
         avatar_url, html_url} = props.result
     const [list] = useLoading({repos_url})
 
@@ -15,12 +15,12 @@ function Output(props) {
 
     return (
         <div className="output">
-            {isFind && <img className="avatar-size" src={avatar_url} alt="ops" />}
+            {avatar_url && <img className="avatar-size" src={avatar_url} alt="ops" />}
             <h1>{name}</h1>
             <h2>{login}</h2>
             <h2>{bio}</h2>
-            {isFind &&<a href={html_url}>go to his/her/its github</a>}
-            <p>{isFind && `Total public repository : ${public_repos}`}</p>
+            {html_url &&<a href={html_url}>go to his/her/its github</a>}
+            <p>{public_repos && `Total public repository : ${public_repos}`}</p>
             { list?.map(item => (
                 <Repo key={item.id} dispInfo={item} />
             ))}
