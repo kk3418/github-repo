@@ -2,13 +2,13 @@ import React, {useCallback, useEffect, useState, FC} from 'react'
 import {getData} from './get-data'
 
 interface Props {
-    setResult: React.Dispatch<{
+    dispatch: React.Dispatch<{
         type: string,
         payload?: any,
     }>,
 }
 
-const Search: FC<Props> = ({setResult}) => {
+const Search: FC<Props> = ({dispatch}) => {
     const [user, setUser] = useState('')
 
     const getUserData = useCallback((input: string) => {
@@ -20,14 +20,14 @@ const Search: FC<Props> = ({setResult}) => {
             },
         }
         getData(url, option).then((res: any) => {
-            setResult({
+            dispatch({
                 type: 'UPDATE',
                 payload: res.data,
             })
-        }).catch(() => setResult({
+        }).catch(() => dispatch({
             type: 'NOT_FOUND',
         }))
-    }, [setResult])
+    }, [dispatch])
     
     const handleClick = () => {
         getUserData(user)

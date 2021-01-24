@@ -11,6 +11,11 @@ interface Args {
 export function useLoading({repos_url, targetRef}: Args) {
     const [list, setList] = useState<undefined | Array<RepoData>>(undefined)
     const [page, setPage] = useState<number>(1)
+    // 修改list有時無法重置的bug 
+    // 用下面的可以改善但還是會有些無法預測的情況
+    useEffect(() => {
+        setList(undefined)
+    }, [repos_url])
 
     useEffect(() => {
         const option = {
@@ -40,6 +45,6 @@ export function useLoading({repos_url, targetRef}: Args) {
         }
         return () => IntersectionObserver.disconnect()
     }, [targetRef])
-    
+
     return {list}
 }
