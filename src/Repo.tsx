@@ -9,7 +9,7 @@ const Repo: FC<{dispInfo: RepoData}> = ({dispInfo}) => {
     const copy = navigator.clipboard
 
     return (
-        <div className="repo-container">
+        <div className="repo">
             <h3>{name}</h3>
             <p>{`Last update : ${updated_at}`}</p>
             {description && <div className="description">

@@ -25,8 +25,8 @@ export function useLoading({repos_url, targetRef}: Args) {
             },
             params: {
                 type: 'public', 
-                sort: 'created', 
-                direction: 'asc',
+                sort: 'updated', 
+                direction: 'desc',
                 per_page: 5,
                 page: page,
             }

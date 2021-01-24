@@ -23,13 +23,13 @@ const Output: FC<{result: UserRepos}> = ({result}) => {
             <h2>{bio}</h2>
             {html_url &&<a href={html_url}>go to his/her/its github</a>}
             <p>{public_repos && `Total public repository : ${public_repos}`}</p>
-            { list?.map(item => (
-                item && <Repo key={item.id} dispInfo={item} />
-            ))}
+            <div className="repo-container">
+                { list?.map(item => (
+                    item && <Repo key={item.id} dispInfo={item} />
+                ))}
+            </div>
             <h1 ref={targetRef}>No more repository</h1>
-            <button className="scroll-to-top"
-                onClick={scrollToTop}
-            >
+            <button className="scroll-to-top" onClick={scrollToTop} >
                 go to top
             </button>
         </div>
