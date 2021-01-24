@@ -2,7 +2,10 @@ import React, {useCallback, useEffect, useState, FC} from 'react'
 import {getData} from './get-data'
 
 interface Props {
-    setResult: any,
+    setResult: React.Dispatch<{
+        type: string,
+        payload?: any,
+    }>,
 }
 
 const Search: FC<Props> = ({setResult}) => {

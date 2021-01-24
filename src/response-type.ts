@@ -10,6 +10,7 @@ export interface UserRepos {
 }
 
 export interface RepoData {
+    id?: string | number,
     name: string,
     clone_url: string,
     updated_at: string,

@@ -6,7 +6,7 @@ import './style.css'
 const App: FC<{}> = () => {
   const initState = {}
   const reducer = (state: any, action: {
-    type: string, payload: any
+    type: string, payload?: any
   }) => {
     switch(action.type) {
       case 'UPDATE':

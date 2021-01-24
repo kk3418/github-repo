@@ -4,18 +4,15 @@ import {animateScroll as scroll} from 'react-scroll'
 import Repo from './Repo'
 import {useLoading} from './useLoading'
 
-interface Props {
-    result: UserRepos,
-}
-const Output: FC<Props> = (props) => {
+const Output: FC<{result: UserRepos}> = ({result}) => {
     const {login, name, public_repos, repos_url, bio,
-        avatar_url, html_url} = props.result
-    const [list] = useLoading({repos_url})
+        avatar_url, html_url} = result
+    const {list} = useLoading({repos_url})
 
     const scrollToTop = () => scroll.scrollToTop({
         duration: 1200,
         smooth: 'easeInOutCubic',
-      })
+    })
 
     return (
         <div className="output">
