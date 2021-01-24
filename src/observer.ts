@@ -9,11 +9,14 @@ const option = {
     threshold: 1.0, 
 }
 
-export const createObserver = (page: number, setPage: 
+export const createObserver = (setPage: 
         React.Dispatch<React.SetStateAction<number>>
     ) => {
     const handleObserver = (entities: IntersectionObserverEntry[]) => {
-        const y = entities[0].boundingClientRect.y
+        if (entities[0].isIntersecting) {
+            setPage(lastPage => lastPage + 1)
+            console.log('go to next page')
+        }
     }
 
     return new IntersectionObserver(handleObserver, option)

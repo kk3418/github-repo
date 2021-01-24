@@ -1,4 +1,4 @@
-import React, {FC} from 'react'
+import React, {useRef, FC} from 'react'
 import {UserRepos} from './response-type'
 import {animateScroll as scroll} from 'react-scroll'
 import Repo from './Repo'
@@ -7,7 +7,8 @@ import {useLoading} from './useLoading'
 const Output: FC<{result: UserRepos}> = ({result}) => {
     const {login, name, public_repos, repos_url, bio,
         avatar_url, html_url} = result
-    const {list} = useLoading({repos_url})
+    const targetRef = useRef<HTMLHeadingElement>(null)
+    const {list} = useLoading({repos_url, targetRef})
 
     const scrollToTop = () => scroll.scrollToTop({
         duration: 1200,
@@ -23,9 +24,9 @@ const Output: FC<{result: UserRepos}> = ({result}) => {
             {html_url &&<a href={html_url}>go to his/her/its github</a>}
             <p>{public_repos && `Total public repository : ${public_repos}`}</p>
             { list?.map(item => (
-                <Repo key={item.id} dispInfo={item} />
+                item && <Repo key={item.id} dispInfo={item} />
             ))}
-            <h1>No more repository</h1>
+            <h1 ref={targetRef}>No more repository</h1>
             <button className="scroll-to-top"
                 onClick={scrollToTop}
             >
