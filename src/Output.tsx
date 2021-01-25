@@ -28,7 +28,7 @@ const Output: FC<{result: UserRepos}> = ({result}) => {
                     item && <Repo key={item.id} dispInfo={item} />
                 ))}
             </div>
-            <h1>No more repository</h1>
+            <h1 ref={targetRef}>No more repository</h1>
             <button className="scroll-to-top" onClick={scrollToTop} >
                 go to top
             </button>
