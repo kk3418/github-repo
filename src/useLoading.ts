@@ -11,8 +11,7 @@ interface Args {
 export function useLoading({repos_url, targetRef}: Args) {
     const [list, setList] = useState<RepoData[]>([])
     const [page, setPage] = useState<number>(0)
-    // 用下面useEffect修改list有時無法重置的bug
-    // 但是IntersectionObserver有的時候會無法作用
+
     useEffect(() => {
         setList([])
     }, [repos_url])
@@ -32,10 +31,15 @@ export function useLoading({repos_url, targetRef}: Args) {
             }
         }
         repos_url && getData(repos_url, option)
-            .then(res => setList(prevList => {
-                if (!res?.data) return [...prevList]
-                return [...prevList, ...res?.data]
-            }))
+            .then(res => {
+                if (res?.data.length === 0) {
+                    setPage(lastPage => lastPage)
+                }
+                setList(prevList => {
+                    if (!res?.data) return [...prevList]
+                    return [...prevList, ...res?.data]
+                })
+            })
     }, [repos_url, page])
 
     useEffect(() => {
@@ -44,8 +48,7 @@ export function useLoading({repos_url, targetRef}: Args) {
         if (targetElement) {
             IntersectionObserver.observe(targetElement)
         }
-        return () => IntersectionObserver.disconnect()
     }, [targetRef])
 
-    return {list}
+    return [list]
 }

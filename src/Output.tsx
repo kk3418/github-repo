@@ -7,8 +7,8 @@ import {useLoading} from './useLoading'
 const Output: FC<{result: UserRepos}> = ({result}) => {
     const {login, name, public_repos, repos_url, bio,
         avatar_url, html_url} = result
-    const targetRef = useRef<HTMLHeadingElement>(null)
-    const {list} = useLoading({repos_url, targetRef})
+    const targetRef = useRef<any>(null)
+    const [list] = useLoading({repos_url, targetRef})
 
     const scrollToTop = () => scroll.scrollToTop({
         duration: 1200,
@@ -28,7 +28,7 @@ const Output: FC<{result: UserRepos}> = ({result}) => {
                     item && <Repo key={item.id} dispInfo={item} />
                 ))}
             </div>
-            <h1 ref={targetRef}>No more repository</h1>
+            <h1>No more repository</h1>
             <button className="scroll-to-top" onClick={scrollToTop} >
                 go to top
             </button>

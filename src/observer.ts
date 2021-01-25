@@ -12,7 +12,10 @@ const option = {
 export const createObserver = (setPage: 
         React.Dispatch<React.SetStateAction<number>>
     ) => {
-    const handleObserver = (entities: IntersectionObserverEntry[]) => {
+    const handleObserver = (
+        entities: IntersectionObserverEntry[], 
+        oberserver: IntersectionObserver
+    ) => {
         if (entities[0].isIntersecting) {
             setPage(lastPage => lastPage + 1)
             console.log('go to next page')
