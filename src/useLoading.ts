@@ -9,12 +9,12 @@ interface Args {
 }
 
 export function useLoading({repos_url, targetRef}: Args) {
-    const [list, setList] = useState<undefined | Array<RepoData>>(undefined)
-    const [page, setPage] = useState<number>(1)
-    // 修改list有時無法重置的bug 
-    // 用下面的可以改善但還是會有些無法預測的情況
+    const [list, setList] = useState<RepoData[]>([])
+    const [page, setPage] = useState<number>(0)
+    // 用下面useEffect修改list有時無法重置的bug
+    // 但是IntersectionObserver有的時候會無法作用
     useEffect(() => {
-        setList(undefined)
+        setList([])
     }, [repos_url])
 
     useEffect(() => {
@@ -24,24 +24,25 @@ export function useLoading({repos_url, targetRef}: Args) {
                 'authorization': process.env.TOKEN
             },
             params: {
-                type: 'public', 
+                type: 'all', 
                 sort: 'updated', 
                 direction: 'desc',
                 per_page: 5,
                 page: page,
             }
         }
-        getData(repos_url, option)
-        .then(res => setList(prevList => {
-            if (prevList) return [...prevList, ...res?.data]
-            else return res?.data
-        }))
+        repos_url && getData(repos_url, option)
+            .then(res => setList(prevList => {
+                if (!res?.data) return [...prevList]
+                return [...prevList, ...res?.data]
+            }))
     }, [repos_url, page])
 
     useEffect(() => {
         const IntersectionObserver = createObserver(setPage)
-        if (targetRef.current) {
-            IntersectionObserver.observe(targetRef.current)
+        const targetElement = targetRef.current
+        if (targetElement) {
+            IntersectionObserver.observe(targetElement)
         }
         return () => IntersectionObserver.disconnect()
     }, [targetRef])
