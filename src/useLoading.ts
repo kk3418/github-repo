@@ -40,6 +40,7 @@ export function useLoading({repos_url, targetRef}: Args) {
                     return [...prevList, ...res?.data]
                 })
             })
+        console.log(page)
     }, [repos_url, page])
 
     useEffect(() => {

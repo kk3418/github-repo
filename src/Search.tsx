@@ -32,6 +32,7 @@ const Search: FC<Props> = ({dispatch}) => {
     const handleClick = () => {
         getUserData(user)
         sessionStorage.setItem('result', user)
+        window.location.replace('/')
     }
 
     useEffect(() => {
