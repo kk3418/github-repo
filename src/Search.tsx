@@ -30,7 +30,6 @@ const Search: FC<Props> = ({dispatch}) => {
     }, [dispatch])
     
     const handleClick = () => {
-        getUserData(user)
         sessionStorage.setItem('result', user)
         window.location.replace('/')
     }
